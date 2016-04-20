@@ -1,4 +1,5 @@
 <?php
+
 add_action('save_post', 'ag_push_notification_to_gcm');
 //add_action('ag_call_event', 'ag_push_notification_to_gcm');
 add_action('post_submitbox_misc_actions', 'ag_add_checkbox_to_publish_box');
@@ -34,11 +35,13 @@ function ag_add_checkbox_to_publish_box()
     }
     // Post status should be publish
     $post_status = get_post_status($post_id);
+
     if ($post_status != 'publish') {
         return;
     }
 
     $ignore_flag = filter_input(INPUT_POST, 'ag_ignore_send', FILTER_VALIDATE_BOOLEAN);
+
 
     if (get_ag_settings() && !($ignore_flag)) {
         wp_schedule_single_event(time(), 'ag_call_event', array($post_id));
@@ -50,20 +53,22 @@ function ag_add_checkbox_to_publish_box()
  * @param $post_id
  */
 
-
 function ag_push_notification_to_gcm($post_id)
 {
     if (!wp_is_post_revision($post_id)) {
         return;
     }
-    $limit =3;
+    $limit =15;
     $offset = 0;
     $registration_ids = ag_get_registered_id($offset); // call of ag_get_registered_id()
 
 
 
+
     $content_post = get_post($post_id); // all post details
     $contents = $content_post->post_content; // only post content
+
+
 
     if (is_array($registration_ids) && false === empty($registration_ids)) {
 
@@ -77,13 +82,13 @@ function ag_push_notification_to_gcm($post_id)
                     'content' => $contents,
                 )
             );
+
             $header = array(
                 'Authorization' => 'key=' . esc_html(get_ag_settings()), // Settings GCM Token
                 'Content-Type' => 'application/json',
             );
 
-
-            $body = wp_remote_post($url, array(
+           wp_remote_post($url, array(
                 'headers' => $header,
                 'body' => wp_json_encode($fields),
             ));
@@ -104,7 +109,6 @@ function ag_push_notification_to_gcm($post_id)
         } // while close
 
     } // outer if close
-
 }
 
 /**
