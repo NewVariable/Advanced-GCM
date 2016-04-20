@@ -80,7 +80,7 @@ function ag_push_notification_to_gcm($post_id)
                 'data' => array(
                     'title' => get_the_title($post_id),
                     'content' => $contents,
-                    'post_id' => get_the_ID(),
+                    'post_id' => "hello",
                 )
             );
 
