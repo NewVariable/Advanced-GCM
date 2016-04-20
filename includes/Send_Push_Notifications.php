@@ -37,8 +37,6 @@ function ag_check_valid($post_id)
         return;
     }
 
-
-
     $ignore_flag = filter_input(INPUT_POST, 'ag_ignore_send', FILTER_VALIDATE_BOOLEAN);
 
 
@@ -71,9 +69,6 @@ function ag_push_notification_to_gcm($post_id)
 
     $content_post = get_post($post_id); // all post details
     $contents = $content_post->post_content; // only post content
-
-    var_dump($post_id);
-    exit;
 
     if (is_array($registration_ids) && false === empty($registration_ids)) {
 
