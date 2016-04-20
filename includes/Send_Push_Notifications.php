@@ -3,9 +3,8 @@
 
 
 add_action('post_submitbox_misc_actions', 'ag_add_checkbox_to_publish_box');
-add_action('save_post', 'ag_push_notification_to_gcm');
-//add_action('ag_call_event', 'ag_push_notification_to_gcm');
-
+add_action('save_post', 'ag_check_valid');
+add_action('ag_call_event', 'ag_push_notification_to_gcm');
 
 
 // Add Checkbox to Publish Box
@@ -21,7 +20,7 @@ function ag_add_checkbox_to_publish_box()
 /**
  * @param $post_id
  */
-/*
+
 // checks about required validation
 function ag_check_valid($post_id)
 {
@@ -50,7 +49,7 @@ function ag_check_valid($post_id)
     if ($post_status != 'publish') {
         return;
     }
-}*/
+}
 
 /**
  * @param $post_id
@@ -70,6 +69,8 @@ function ag_push_notification_to_gcm($post_id)
     $content_post = get_post($post_id); // all post details
     $contents = $content_post->post_content; // only post content
 
+
+
     if (is_array($registration_ids) && false === empty($registration_ids)) {
 
         while (true) {
@@ -80,7 +81,7 @@ function ag_push_notification_to_gcm($post_id)
                 'data' => array(
                     'title' => get_the_title($post_id),
                     'content' => $contents,
-                    'post_id' => $post_id,
+                    'post_id' => 12,
                 )
             );
 
