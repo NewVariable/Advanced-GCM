@@ -1,7 +1,7 @@
 <?php
 
-add_action('save_post', 'ag_push_notification_to_gcm');
-//add_action('ag_call_event', 'ag_push_notification_to_gcm');
+add_action('save_post', 'ag_check_valid');
+add_action('ag_call_event', 'ag_push_notification_to_gcm');
 add_action('post_submitbox_misc_actions', 'ag_add_checkbox_to_publish_box');
 
 
@@ -20,7 +20,7 @@ function ag_add_checkbox_to_publish_box()
  */
 
 // checks about required validation
-/*function ag_check_valid($post_id)
+function ag_check_valid($post_id)
 {
     if (defined('DOING_AJAX') && DOING_AJAX) {
         return;
@@ -47,7 +47,7 @@ function ag_add_checkbox_to_publish_box()
         wp_schedule_single_event(time(), 'ag_call_event', array($post_id));
 
     }
-}*/
+}
 
 /**
  * @param $post_id

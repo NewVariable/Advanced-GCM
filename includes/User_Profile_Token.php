@@ -24,11 +24,11 @@ function ag_extra_user_profile_fields($user)
 
         <?php
         foreach ($user_metas as $user_meta) {
-            $user_meta_len = strlen($user_meta);
+            //$user_meta_len = strlen($user_meta);
 
-            if ($user_meta_len > 100) {
+            /*if ($user_meta_len > 100) {
                 $user_meta = substr($user_meta, 0, 5) . '**********' . substr($user_meta, $user_meta_len - 5);
-            } ?>
+            }*/ ?>
 
             <tr>
                 <td>
