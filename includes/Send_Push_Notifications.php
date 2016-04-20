@@ -49,6 +49,8 @@ function ag_check_valid($post_id)
 /**
  * @param $post_id
  */
+
+
 function ag_push_notification_to_gcm($post_id)
 {
     if (!wp_is_post_revision($post_id)) {
@@ -57,6 +59,8 @@ function ag_push_notification_to_gcm($post_id)
     $limit = 3;
     $offset = 0;
     $registration_ids = ag_get_registered_id($offset); // call of ag_get_registered_id()
+
+
 
     $content_post = get_post($post_id); // all post details
     $contents = $content_post->post_content; // only post content
@@ -74,10 +78,9 @@ function ag_push_notification_to_gcm($post_id)
                 )
             );
             $header = array(
-                'Authorization' => 'key=' . esc_html(get_option('ag_settings')), // Settings GCM Token
+                'Authorization' => 'key=' . esc_html(get_ag_settings()), // Settings GCM Token
                 'Content-Type' => 'application/json',
             );
-
             $body = wp_remote_post($url, array(
                 'headers' => $header,
                 'body' => wp_json_encode($fields),

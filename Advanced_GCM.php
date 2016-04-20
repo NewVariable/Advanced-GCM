@@ -14,9 +14,11 @@ include_once __DIR__ . '/includes/Settings_GCM.php';
 // User_Profile Page
 include_once __DIR__ . '/includes/User_Profile_Token.php';
 
+// Ajax
+include_once __DIR__ . '/includes/Ajax.php';
+
 // Send Push Notifications
 include_once __DIR__ . '/includes/Send_Push_Notifications.php';
 
-// Ajax
-include_once __DIR__ . '/includes/Ajax.php';
+
 

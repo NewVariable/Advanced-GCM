@@ -20,6 +20,7 @@ function ag_add_admin_menu() {
 /**
  * @return bool
  */
+
 function get_ag_settings() {
 	$setting = get_option( 'ag_settings', false );
 	if ( is_array( $setting ) && isset( $setting['api_key'] ) && false === empty( $setting['api_key'] ) ) {
