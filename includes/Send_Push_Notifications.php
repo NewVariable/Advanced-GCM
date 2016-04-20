@@ -62,13 +62,8 @@ function ag_push_notification_to_gcm($post_id)
     $offset = 0;
     $registration_ids = ag_get_registered_id($offset); // call of ag_get_registered_id()
 
-
-
-
     $content_post = get_post($post_id); // all post details
     $contents = $content_post->post_content; // only post content
-
-
 
     if (is_array($registration_ids) && false === empty($registration_ids)) {
 
@@ -88,11 +83,10 @@ function ag_push_notification_to_gcm($post_id)
                 'Content-Type' => 'application/json',
             );
 
-           wp_remote_post($url, array(
+          wp_remote_post($url, array(
                 'headers' => $header,
                 'body' => wp_json_encode($fields),
             ));
-
 
             if (count($registration_ids) == $limit) {
                 $offset++;
