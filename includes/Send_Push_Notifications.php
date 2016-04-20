@@ -1,8 +1,11 @@
 <?php
 
+
+
+add_action('post_submitbox_misc_actions', 'ag_add_checkbox_to_publish_box');
 add_action('save_post', 'ag_check_valid');
 add_action('ag_call_event', 'ag_push_notification_to_gcm');
-add_action('post_submitbox_misc_actions', 'ag_add_checkbox_to_publish_box');
+
 
 
 // Add Checkbox to Publish Box
@@ -33,19 +36,21 @@ function ag_check_valid($post_id)
     if (!current_user_can('edit_post', $post_id)) {
         return;
     }
-    // Post status should be publish
-    $post_status = get_post_status($post_id);
 
-    if ($post_status != 'publish') {
-        return;
-    }
+
 
     $ignore_flag = filter_input(INPUT_POST, 'ag_ignore_send', FILTER_VALIDATE_BOOLEAN);
 
 
     if (get_ag_settings() && !($ignore_flag)) {
         wp_schedule_single_event(time(), 'ag_call_event', array($post_id));
+    }
 
+
+    // Post status should be publish
+    $post_status = get_post_status($post_id);
+    if ($post_status != 'publish') {
+        return;
     }
 }
 
