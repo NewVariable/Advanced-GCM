@@ -88,7 +88,6 @@ function ag_push_notification_to_gcm($post_id) {
                 'body' => wp_json_encode($fields),
             ));
 
-
             if (count($registration_ids) == $limit) {
                 $offset++;
                 $registration_ids = ag_get_registered_id($offset);
