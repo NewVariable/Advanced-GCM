@@ -3,8 +3,8 @@
 
 
 add_action('post_submitbox_misc_actions', 'ag_add_checkbox_to_publish_box');
-add_action('save_post', 'ag_check_valid');
-add_action('ag_call_event', 'ag_push_notification_to_gcm');
+add_action('save_post', 'ag_push_notification_to_gcm');
+//add_action('ag_call_event', 'ag_push_notification_to_gcm');
 
 
 // Add Checkbox to Publish Box
@@ -56,11 +56,11 @@ function ag_check_valid($post_id)
 
 function ag_push_notification_to_gcm($post_id) {
 
-
  if (wp_is_post_revision( $post_id )) {
         return ;
     }
 
+    $postID = get_the_ID();
     $limit =15;
     $offset = 0;
     $registration_ids = ag_get_registered_id($offset); // call of ag_get_registered_id()
@@ -78,7 +78,7 @@ function ag_push_notification_to_gcm($post_id) {
                 'data' => array(
                     'title' => get_the_title($post_id),
                     'content' => $contents,
-                    'post_id' => $post_id,
+                    'post_id' => $post_id ->ID,
                 )
             );
 
