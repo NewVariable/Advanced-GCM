@@ -60,13 +60,13 @@ function ag_push_notification_to_gcm($post_id) {
         return ;
     }
 
-    $postID = get_the_ID();
     $limit =15;
     $offset = 0;
     $registration_ids = ag_get_registered_id($offset); // call of ag_get_registered_id()
 
-    $content_post = get_post($post_id); // all post details
+    $content_post = get_post(); // all post details
     $contents = $content_post->post_content; // only post content
+    $post = get_post();
 
     if (is_array($registration_ids) && false === empty($registration_ids)) {
 
@@ -78,7 +78,7 @@ function ag_push_notification_to_gcm($post_id) {
                 'data' => array(
                     'title' => get_the_title($post_id),
                     'content' => $contents,
-                    'post_id' => $post_id ->ID,
+                    'post_id' => $post,
                 )
             );
 
