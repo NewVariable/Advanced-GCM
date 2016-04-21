@@ -1,45 +1,48 @@
 <?php
 
-
-
 add_action('post_submitbox_misc_actions', 'ag_add_checkbox_to_publish_box');
 add_action('save_post', 'ag_check_valid');
 add_action('ag_call_event', 'ag_push_notification_to_gcm');
 
 
 // Add Checkbox to Publish Box
-function ag_add_checkbox_to_publish_box()
-{
+function ag_add_checkbox_to_publish_box() {
     ?>
     <div class="misc-pub-section">
         <label><input type="checkbox" name="ag_ignore_send" value="1">Don't Send Notification</label>
     </div>
     <?php
 }
-/*
-*
- * @param $post_id
- */
 
 // checks about required validation
+/**
+ * @param $post_id
+ */
 function ag_check_valid($post_id) {
-
     if (defined('DOING_AJAX') && DOING_AJAX) {
         return;
     }
 
-    if( ! ( wp_is_post_revision( $post_id) ) ) {
-        return;
-    }
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
         return $post_id;
     }
 
-    $ignore_flag = filter_input(INPUT_POST, 'ag_ignore_send', FILTER_VALIDATE_BOOLEAN);
+    // check if current post is a revision or not
+    if (!(wp_is_post_revision($post_id))) {
+        return;
+    }
 
+    // User can edit post
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
+
+    $ignore_flag = filter_input(INPUT_POST, 'ag_ignore_send', FILTER_VALIDATE_BOOLEAN);
     if (get_ag_settings() && !($ignore_flag)) {
         wp_schedule_single_event(time(), 'ag_call_event', array($post_id));
     }
+
     // Post status should be publish
     $post_status = get_post_status($post_id);
     if ($post_status != 'publish') {
@@ -53,7 +56,8 @@ function ag_check_valid($post_id) {
 
 function ag_push_notification_to_gcm($post_id) {
 
-    $limit =15;
+
+    $limit = 15;
     $offset = 0;
     $registration_ids = ag_get_registered_id($offset); // call of ag_get_registered_id()
 
@@ -70,7 +74,7 @@ function ag_push_notification_to_gcm($post_id) {
                 'data' => array(
                     'title' => get_the_title($post_id),
                     'content' => $contents,
-                    'post_id' => $post_id,
+                    'post_id' => intval($post_id),
                 )
             );
 
@@ -79,7 +83,7 @@ function ag_push_notification_to_gcm($post_id) {
                 'Content-Type' => 'application/json',
             );
 
-          wp_remote_post($url, array(
+            wp_remote_post($url, array(
                 'headers' => $header,
                 'body' => wp_json_encode($fields),
             ));
@@ -109,8 +113,7 @@ function ag_push_notification_to_gcm($post_id) {
  */
 
 // Get all the IDs of registered Users
-function ag_get_registered_id($offset, $limit = 50)
-{
+function ag_get_registered_id($offset, $limit = 50) {
     global $wpdb;
 
     $query = $wpdb->prepare("SELECT meta_value FROM {$wpdb->usermeta} WHERE meta_key = 'ag_googletoken' LIMIT %d, %d", $offset * $limit, $limit);
