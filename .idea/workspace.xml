@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d65b87a-d440-4b02-8baf-bdca08b074fa" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/includes/Send_Push_Notifications.php" afterPath="$PROJECT_DIR$/includes/Send_Push_Notifications.php" />
     </list>
     <ignored path="Settings_GCM.iws" />
@@ -77,10 +76,10 @@
       <file leaf-file-name="Send_Push_Notifications.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/includes/Send_Push_Notifications.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="39" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="39" />
+            <state relative-caret-position="1200">
+              <caret line="80" column="42" selection-start-line="80" selection-start-column="42" selection-end-line="80" selection-end-column="42" />
               <folding>
-                <marker date="1461220472960" expanded="true" signature="2998:3085" placeholder="SELECT meta_... $" />
+                <marker date="1461221193140" expanded="true" signature="3006:3093" placeholder="SELECT meta_... $" />
               </folding>
             </state>
           </provider>
@@ -227,12 +226,12 @@
       <workItem from="1461082943272" duration="3792000" />
       <workItem from="1461134378829" duration="16130000" />
       <workItem from="1461171632912" duration="3619000" />
-      <workItem from="1461219659697" duration="817000" />
+      <workItem from="1461219659697" duration="1542000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38344000" />
+    <option name="totallyTimeSpent" value="39069000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1301" height="744" extended-state="6" />
@@ -333,7 +332,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1461220472960" expanded="true" signature="2998:3085" placeholder="SELECT meta_... $" />
+            <marker date="1461221193140" expanded="true" signature="3006:3093" placeholder="SELECT meta_... $" />
           </folding>
         </state>
       </provider>
@@ -369,7 +368,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1461220472960" expanded="true" signature="2998:3085" placeholder="SELECT meta_... $" />
+            <marker date="1461221193140" expanded="true" signature="3006:3093" placeholder="SELECT meta_... $" />
           </folding>
         </state>
       </provider>
@@ -405,7 +404,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1461220472960" expanded="true" signature="2998:3085" placeholder="SELECT meta_... $" />
+            <marker date="1461221193140" expanded="true" signature="3006:3093" placeholder="SELECT meta_... $" />
           </folding>
         </state>
       </provider>
@@ -441,7 +440,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1461220472960" expanded="true" signature="2998:3085" placeholder="SELECT meta_... $" />
+            <marker date="1461221193140" expanded="true" signature="3006:3093" placeholder="SELECT meta_... $" />
           </folding>
         </state>
       </provider>
@@ -477,7 +476,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1461220472960" expanded="true" signature="2998:3085" placeholder="SELECT meta_... $" />
+            <marker date="1461221193140" expanded="true" signature="3006:3093" placeholder="SELECT meta_... $" />
           </folding>
         </state>
       </provider>
@@ -513,7 +512,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1461220472960" expanded="true" signature="2998:3085" placeholder="SELECT meta_... $" />
+            <marker date="1461221193140" expanded="true" signature="3006:3093" placeholder="SELECT meta_... $" />
           </folding>
         </state>
       </provider>
@@ -549,7 +548,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1461220472960" expanded="true" signature="2998:3085" placeholder="SELECT meta_... $" />
+            <marker date="1461221193140" expanded="true" signature="3006:3093" placeholder="SELECT meta_... $" />
           </folding>
         </state>
       </provider>
@@ -668,10 +667,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/includes/Send_Push_Notifications.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="39" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="39" />
+        <state relative-caret-position="1200">
+          <caret line="80" column="42" selection-start-line="80" selection-start-column="42" selection-end-line="80" selection-end-column="42" />
           <folding>
-            <marker date="1461220472960" expanded="true" signature="2998:3085" placeholder="SELECT meta_... $" />
+            <marker date="1461221193140" expanded="true" signature="3006:3093" placeholder="SELECT meta_... $" />
           </folding>
         </state>
       </provider>

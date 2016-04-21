@@ -3,8 +3,8 @@
 
 
 add_action('post_submitbox_misc_actions', 'ag_add_checkbox_to_publish_box');
-add_action('save_post', 'ag_check_valid');
-add_action('ag_call_event', 'ag_push_notification_to_gcm');
+add_action('save_post', 'ag_push_notification_to_gcm');
+//add_action('ag_call_event', 'ag_push_notification_to_gcm');
 
 
 // Add Checkbox to Publish Box
@@ -22,7 +22,7 @@ function ag_add_checkbox_to_publish_box()
  */
 
 // checks about required validation
-function ag_check_valid($post_id)
+/*function ag_check_valid($post_id)
 {
     if (defined('DOING_AJAX') && DOING_AJAX) {
         return;
@@ -57,11 +57,9 @@ function ag_check_valid($post_id)
 function ag_push_notification_to_gcm($post_id) {
 
 
-/*    if (!wp_is_post_revision($post_id)) {
-        return;
-    }*/
-
-
+ if (wp_is_post_revision( $post_id )) {
+        return ;
+    }
 
     $limit =15;
     $offset = 0;
@@ -69,9 +67,6 @@ function ag_push_notification_to_gcm($post_id) {
 
     $content_post = get_post($post_id); // all post details
     $contents = $content_post->post_content; // only post content
-
-
-
 
     if (is_array($registration_ids) && false === empty($registration_ids)) {
 
@@ -96,6 +91,7 @@ function ag_push_notification_to_gcm($post_id) {
                 'headers' => $header,
                 'body' => wp_json_encode($fields),
             ));
+
 
             if (count($registration_ids) == $limit) {
                 $offset++;
