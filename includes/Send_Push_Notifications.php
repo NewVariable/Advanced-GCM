@@ -1,6 +1,7 @@
 <?php
 
 
+
 add_action('post_submitbox_misc_actions', 'ag_add_checkbox_to_publish_box');
 add_action('save_post', 'ag_check_valid');
 add_action('ag_call_event', 'ag_push_notification_to_gcm');
@@ -15,23 +16,24 @@ function ag_add_checkbox_to_publish_box()
     </div>
     <?php
 }
-
-
-// checks about required validation
-/**
+/*
+*
  * @param $post_id
  */
-function ag_check_valid($post_id)
-{
+
+// checks about required validation
+function ag_check_valid($post_id) {
 
     if (defined('DOING_AJAX') && DOING_AJAX) {
         return;
     }
 
-    if (!(wp_is_post_revision($post_id))) {
+    if( ! ( wp_is_post_revision( $post_id) ) ) {
         return;
     }
-
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return $post_id;
+    }
 
     $ignore_flag = filter_input(INPUT_POST, 'ag_ignore_send', FILTER_VALIDATE_BOOLEAN);
 
@@ -49,10 +51,9 @@ function ag_check_valid($post_id)
  * @param $post_id
  */
 
-function ag_push_notification_to_gcm($post_id)
-{
+function ag_push_notification_to_gcm($post_id) {
 
-    $limit = 15;
+    $limit =15;
     $offset = 0;
     $registration_ids = ag_get_registered_id($offset); // call of ag_get_registered_id()
 
@@ -78,7 +79,7 @@ function ag_push_notification_to_gcm($post_id)
                 'Content-Type' => 'application/json',
             );
 
-            wp_remote_post($url, array(
+          wp_remote_post($url, array(
                 'headers' => $header,
                 'body' => wp_json_encode($fields),
             ));
