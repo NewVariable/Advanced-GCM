@@ -12,6 +12,17 @@ function ag_add_device()
 
     $user_id = absint(filter_input(INPUT_GET, 'user_id', FILTER_VALIDATE_INT));
 
+    $token = filter_input(INPUT_GET, 'security_key', FILTER_SANITIZE_STRING);
+
+    $res = get_option('ag_settings');
+    $get_key = $res['ag_uid'];
+
+    $encryption = md5($device_id . $get_key);
+
+    var_dump($encryption);
+
+
+
     if (0 == $user_id) { 
         $result = get_option('ag_settings');
         $user_id = absint((isset($result['default_user']) && intval($result['default_user']) > 0) ? $result['default_user'] : 0);
@@ -29,7 +40,13 @@ function ag_add_device()
             }
         }
     }
+
+
+
+
     wp_send_json_error();
+
+
 
     wp_die(); // this is required to terminate immediately and return a proper response
 }
