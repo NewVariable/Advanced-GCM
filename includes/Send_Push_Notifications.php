@@ -18,33 +18,36 @@ function ag_add_checkbox_to_publish_box() {
 /**
  * @param $post_id
  */
-function ag_check_valid($post_id) {
-    if (defined('DOING_AJAX') && DOING_AJAX) {
+function ag_check_valid( $post_id ) {
+    if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
         return;
     }
 
-    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
         return $post_id;
     }
 
     // check if current post is a revision or not
-    if (!(wp_is_post_revision($post_id))) {
+    if ( wp_is_post_revision( $post_id ) ) {
         return;
     }
 
     // User can edit post
-    if (!current_user_can('edit_post', $post_id)) {
+    if ( ! current_user_can( 'edit_post', $post_id ) ) {
         return;
     }
 
-    $ignore_flag = filter_input(INPUT_POST, 'ag_ignore_send', FILTER_VALIDATE_BOOLEAN);
-    if (get_ag_settings() && !($ignore_flag)) {
-        wp_schedule_single_event(time(), 'ag_call_event', array($post_id));
-    }
-    // Post status should be publish
-    $post_status = get_post_status(error_log($post_id));
-    if ($post_status != 'publish') {
+    if ( 'publish' !== get_post_status( $post_id ) ) {
         return;
+    }
+
+    $ignore_flag = filter_input( INPUT_POST, 'ag_ignore_send', FILTER_VALIDATE_BOOLEAN );
+    if ( $ignore_flag ) {
+        return;
+    }
+
+    if ( get_ag_settings() ) {
+        wp_schedule_single_event( time(), 'ag_call_event', array( $post_id ) );
     }
 }
 
