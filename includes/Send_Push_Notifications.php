@@ -41,7 +41,6 @@ function ag_check_valid($post_id) {
     if (get_ag_settings() && !($ignore_flag)) {
         wp_schedule_single_event(time(), 'ag_call_event', array($post_id));
     }
-
     // Post status should be publish
     $post_status = get_post_status($post_id);
     if ($post_status != 'publish') {
@@ -73,7 +72,7 @@ function ag_push_notification_to_gcm($post_id) {
                 'data' => array(
                     'title' => get_the_title($post_id),
                     'content' => $contents,
-                    'post_id' => (string)$post_id,
+                    'post_id' => $post_id,
                 )
             );
 
@@ -102,10 +101,6 @@ function ag_push_notification_to_gcm($post_id) {
         } // while close
 
     } // outer if close
-
-
-    var_dump($post);
-    exit;
 }
 
 /**
