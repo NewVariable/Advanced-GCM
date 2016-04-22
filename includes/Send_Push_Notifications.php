@@ -37,7 +37,6 @@ function ag_check_valid($post_id) {
         return;
     }
 
-
     $ignore_flag = filter_input(INPUT_POST, 'ag_ignore_send', FILTER_VALIDATE_BOOLEAN);
     if (get_ag_settings() && !($ignore_flag)) {
         wp_schedule_single_event(time(), 'ag_call_event', array($post_id));
@@ -103,6 +102,10 @@ function ag_push_notification_to_gcm($post_id) {
         } // while close
 
     } // outer if close
+
+
+    var_dump($post);
+    exit;
 }
 
 /**

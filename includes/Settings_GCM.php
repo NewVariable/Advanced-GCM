@@ -26,7 +26,6 @@ function get_ag_settings() {
 	if ( is_array( $setting ) && isset( $setting['api_key'] ) && false === empty( $setting['api_key'] ) ) {
 		return $setting['api_key'];
 	}
-
 	return false;
 }
 
@@ -149,3 +148,4 @@ function ag_options_page() {
 	</form>
 	<?php
 }
+
