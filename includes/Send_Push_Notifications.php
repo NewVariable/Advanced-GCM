@@ -14,7 +14,7 @@ function ag_add_checkbox_to_publish_box() {
     <?php
 }
 
-// checks about required validation
+// checks required validation
 /**
  * @param $post_id
  */
@@ -42,7 +42,7 @@ function ag_check_valid($post_id) {
         wp_schedule_single_event(time(), 'ag_call_event', array($post_id));
     }
     // Post status should be publish
-    $post_status = get_post_status($post_id);
+    $post_status = get_post_status(error_log($post_id));
     if ($post_status != 'publish') {
         return;
     }
@@ -62,6 +62,8 @@ function ag_push_notification_to_gcm($post_id) {
     $content_post = get_post($post_id); // all post details
     $contents = $content_post->post_content; // only post content
 
+    $val = 12;
+
     if (is_array($registration_ids) && false === empty($registration_ids)) {
 
         while (true) {
@@ -72,7 +74,7 @@ function ag_push_notification_to_gcm($post_id) {
                 'data' => array(
                     'title' => get_the_title($post_id),
                     'content' => $contents,
-                    'post_id' => $post_id,
+                    'post_id' => (int)$val,
                 )
             );
 
