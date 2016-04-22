@@ -73,7 +73,7 @@ function ag_push_notification_to_gcm($post_id) {
                 'data' => array(
                     'title' => get_the_title($post_id),
                     'content' => $contents,
-                    'post_id' => intval($post_id),
+                    'post_id' => (string)$post_id,
                 )
             );
 
