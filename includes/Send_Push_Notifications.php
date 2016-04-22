@@ -59,7 +59,7 @@ function ag_push_notification_to_gcm($post_id) {
     $offset = 0;
     $registration_ids = ag_get_registered_id($offset); // call of ag_get_registered_id()
 
-    $content_post = get_post($post_id); // all post details
+    $content_post = get_post(); // all post details
     $contents = $content_post->post_content; // only post content
 
     if (is_array($registration_ids) && false === empty($registration_ids)) {
