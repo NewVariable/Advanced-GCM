@@ -14,6 +14,10 @@ function ag_add_device()
 
     $token = filter_input(INPUT_GET, 'security_key', FILTER_SANITIZE_STRING);
 
+    var_dump($token);
+
+    var_dump("Hello");
+
     $res = get_option('ag_settings');
     $get_key = $res['ag_uid'];
 
