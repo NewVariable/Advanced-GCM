@@ -51,13 +51,15 @@ function ag_check_valid( $post_id ) {
     }
 }
 
+
+
+// sends a notification to registered mobile devices.
 /**
  * @param $post_id
  */
 
 function ag_push_notification_to_gcm($post_id) {
-
-
+    
     $limit = 15;
     $offset = 0;
     $registration_ids = ag_get_registered_id($offset); // call of ag_get_registered_id()

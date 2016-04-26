@@ -8,8 +8,7 @@ add_action('edit_user_profile', 'ag_extra_user_profile_fields');
 /**
  * @param $user
  */
-function ag_extra_user_profile_fields($user)
-{
+function ag_extra_user_profile_fields($user) {
     ?>
     <h3><?php _e("Google Token", "blank"); ?></h3>
 
@@ -39,7 +38,6 @@ function ag_extra_user_profile_fields($user)
             </tr>
 
             <?php
-            
         } // foreach close
         ?>
     </table>
@@ -54,8 +52,7 @@ add_action('edit_user_profile_update', 'ag_save_extra_user_profile_fields');
  *
  * @return bool
  */
-function ag_save_extra_user_profile_fields($user_id)
-{
+function ag_save_extra_user_profile_fields($user_id) {
 
     if (!current_user_can('edit_user', $user_id)) {
         return false;

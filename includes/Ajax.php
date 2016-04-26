@@ -3,7 +3,7 @@
 add_action('wp_ajax_ag_add_device', 'ag_add_device');
 add_action('wp_ajax_nopriv_ag_add_device', 'ag_add_device');
 
-// Check if device is added or not , if not then add device.
+// Check if device is registered or not , if not then will register device.
 
 function ag_add_device() {
 

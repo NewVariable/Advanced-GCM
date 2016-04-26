@@ -86,30 +86,43 @@ function ag_text_field_api_key() {
 }
 
 function ag_text_field_unique_id() {
-	$option = get_option('ag_settings');
-	?>
 
-	<script type="application/javascript">
+$option = get_option('ag_settings');
 
-	// will generate random string 
-		function ag_random_generator() {
-			var string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-			var ret_val = "";
+    if(isset($option['ag_uid']) && !empty($option['ag_uid'])){
+        ?>
+            <label name='ag_settings[ag_uid]' id='ag_uid'> <?php echo esc_html ($option['ag_uid']); ?></label>
+        <?php
+    } // if close
 
-			for(var i = 0 ; i < string.length ; i++){
-				ret_val+= string.charAt(Math.floor(Math.random() * string.length));
-			}
-			 document.getElementById('ag_uid').value = ret_val;
-		}
-	</script>
+    else{
+?>
+    <script type="application/javascript">
 
-	<input type='text' id="ag_uid" name='ag_settings[ag_uid]' value="<?php echo $option['ag_uid'] ?>" /><br>
-	<span class="description"><?php _e( "Here Unique ID will be generated" ); ?></span> <br><br>
+        // will generate random string
+         function ag_random_generator() {
+              var string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+              var random_string = "";
 
-	<input type="button" class="button button-primary" value="Generate Key" onclick="ag_random_generator(this)"> </input>
+              for(var i = 0 ; i < string.length ; i++) {
+                  random_string += string.charAt(Math.floor(Math.random() * string.length));
+              }
 
-	<?php
-}
+               document.getElementById('ag_uid').value = random_string;
+
+         } // ag_random_generator close
+
+        </script>
+
+        	<input type='text' id="ag_uid" name='ag_settings[ag_uid]' value="<?php echo $option['ag_uid'] ?>" /><br>
+            <span class="description"><?php _e( "Here Unique ID will be generated" ); ?></span> <br><br>
+
+            <input type="button" class="button button-primary" value="Generate Key" onclick="ag_random_generator(this)"/>
+
+    <?php
+    } // else close
+
+} // function close
 
 function ag_text_field_default_users() {
 
