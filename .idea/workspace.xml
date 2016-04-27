@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6d65b87a-d440-4b02-8baf-bdca08b074fa" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/includes/Ajax.php" afterPath="$PROJECT_DIR$/includes/Ajax.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/includes/Settings_GCM.php" afterPath="$PROJECT_DIR$/includes/Settings_GCM.php" />
     </list>
     <ignored path="Settings_GCM.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,7 +31,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Ajax.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Ajax.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/includes/Ajax.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="362">
@@ -53,11 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Settings_GCM.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Settings_GCM.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/includes/Settings_GCM.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="94" column="50" selection-start-line="94" selection-start-column="50" selection-end-line="94" selection-end-column="50" />
+            <state relative-caret-position="303">
+              <caret line="150" column="6" selection-start-line="150" selection-start-column="6" selection-end-line="150" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -261,12 +259,12 @@
       <workItem from="1461519325112" duration="733000" />
       <workItem from="1461565653894" duration="4716000" />
       <workItem from="1461652802212" duration="19442000" />
-      <workItem from="1461739366974" duration="7237000" />
+      <workItem from="1461739366974" duration="8702000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="126629000" />
+    <option name="totallyTimeSpent" value="128094000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
@@ -660,14 +658,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/includes/Settings_GCM.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="94" column="50" selection-start-line="94" selection-start-column="50" selection-end-line="94" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/includes/Send_Push_Notifications.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-135">
@@ -692,6 +682,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="362">
           <caret line="30" column="68" selection-start-line="30" selection-start-column="68" selection-end-line="30" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/includes/Settings_GCM.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="150" column="6" selection-start-line="150" selection-start-column="6" selection-end-line="150" selection-end-column="6" />
           <folding />
         </state>
       </provider>
