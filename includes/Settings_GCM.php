@@ -90,15 +90,16 @@ function ag_text_field_unique_id() {
 $option = get_option('ag_settings');
 
     if(isset($option['ag_uid']) && !empty($option['ag_uid'])){
+
         ?>
             <label name='ag_settings[ag_uid]' id='ag_uid'> <?php echo esc_html ($option['ag_uid']); ?></label>
+            <input type='hidden' id="ag_uid" name='ag_settings[ag_uid]' value="<?php echo $option['ag_uid'] ?>" /><br>
         <?php
     } // if close
 
     else{
 ?>
     <script type="application/javascript">
-
         // will generate random string
          function ag_random_generator() {
               var string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -107,7 +108,6 @@ $option = get_option('ag_settings');
               for(var i = 0 ; i < string.length ; i++) {
                   random_string += string.charAt(Math.floor(Math.random() * string.length));
               }
-
                document.getElementById('ag_uid').value = random_string;
 
          } // ag_random_generator close

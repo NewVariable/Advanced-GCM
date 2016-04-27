@@ -28,7 +28,8 @@ function ag_add_device() {
         if (0 < $user_id) {
             $res = get_user_meta($user_id, 'ag_googletoken');
 
-            if (false == in_array($device_id, $res) && ($security_key == $encrypted_key)) {
+            // compare both the keys , if match then device id will be registered.
+            if (false == in_array($device_id, $res)&& ($security_key == $encrypted_key)) {
                 add_user_meta($user_id, 'ag_googletoken', $device_id);
 
                 wp_send_json_success();
