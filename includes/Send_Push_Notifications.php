@@ -65,7 +65,7 @@ function nv_agcm_send_push_notification( $post_id ) {
 
 	$limit            = 15;
 	$offset           = 0;
-	$registration_ids = ag_get_registered_id( $offset ); // call of ag_get_registered_id()
+	$registration_ids = nv_agcm_get_registered_id( $offset ); // call of ag_get_registered_id()
 
 	$content_post = get_post( $post_id ); // all post details
 	$contents     = $content_post->post_content; // only post content
@@ -96,7 +96,7 @@ function nv_agcm_send_push_notification( $post_id ) {
 
 			if ( count( $registration_ids ) == $limit ) {
 				$offset ++;
-				$registration_ids = ag_get_registered_id( $offset );
+				$registration_ids = nv_agcm_get_registered_id( $offset );
 
 				if ( is_array( $registration_ids ) && count( $registration_ids ) > 0 ) {
 					continue;
@@ -118,7 +118,7 @@ function nv_agcm_send_push_notification( $post_id ) {
  *
  * @return array
  */
-function ag_get_registered_id( $offset, $limit = 50 ) {
+function nv_agcm_get_registered_id( $offset, $limit = 50 ) {
 	global $wpdb;
 
 	$query  = $wpdb->prepare( "SELECT meta_value FROM {$wpdb->usermeta} WHERE meta_key = 'nv_agcm_googletoken' LIMIT %d, %d", $offset * $limit, $limit );
