@@ -1,10 +1,13 @@
 <?php
 
-add_action( 'admin_menu', 'ag_add_admin_menu' );
-add_action( 'admin_init', 'ag_settings_init' );
+add_action( 'admin_menu', 'nv_agcm_add_admin_menu' );
+add_action( 'admin_init', 'nv_agcm_settings_init' );
 
-// Shows message if Google API Key is not set
-function ag_no_setting_notice() {
+/**
+ * Shows error message if Google API Key is not set
+ */
+
+function nv_agcm_no_setting_notice() {
 	?>
 	<div class="notice notice-error is-dismissible">
 		<p><?php printf( esc_html__( 'Push Notifications: API key is not set, %s Please update the setting %s', 'ag' ), '<a href="' . esc_url( admin_url( 'options-general.php?page=advanced-gcm' ) ) . '">', "</a>" ); ?></p>
@@ -12,16 +15,17 @@ function ag_no_setting_notice() {
 	<?php
 }
 
-function ag_add_admin_menu() {
+function nv_agcm_add_admin_menu() {
 	add_submenu_page( 'options-general.php', 'Advanced-GCM', 'Advanced-GCM', 'manage_options', 'advanced-gcm', 'ag_options_page' );
 }
 
-// Get Google API Key of Settings page
 /**
+ * Get Google API Key of Settings page
+ *
  * @return bool
  */
 
-function get_ag_settings() {
+function nv_get_agcm_settings() {
 	$setting = get_option( 'ag_settings', false );
 	if ( is_array( $setting ) && isset( $setting['api_key'] ) && false === empty( $setting['api_key'] ) ) {
 		return $setting['api_key'];
@@ -29,53 +33,58 @@ function get_ag_settings() {
 	return false;
 }
 
-function ag_settings_init() {
-	if ( false === get_ag_settings() ) {
-		add_action( 'admin_notices', 'ag_no_setting_notice' );
+/**
+ * Initialize settings sections & settings fields
+ */
+function nv_agcm_settings_init() {
+	if ( false === nv_get_agcm_settings() ) {
+		add_action( 'admin_notices', 'nv_agcm_no_setting_notice' );
 	}
 
-	register_setting( 'pluginPage', 'ag_settings' ); // register a new setting to Settings page
+	register_setting( 'nv_ag_add_settings_page', 'ag_settings' ); // register a new setting to Settings page
 
 
 // Add a new Section to a Settings page
 	add_settings_section(
-		'ag_pluginPage_section',
-		__( '', 'advanced-GCM' ), // Your Section Description of advanced-gcm
+		'nv_ag_add_settings_page_section',
+		__( '', 'advanced-gcm' ), // Your Section Description of advanced-gcm
 		'ag_settings_section_callback',
-		'pluginPage' // Call of do_settings_sections();
+		'nv_ag_add_settings_page' // Call of do_settings_sections();
 	);
 
 
 // Add a Google API Key field to a Settings page
 	add_settings_field(
 		'api_key',
-		__( 'Google API Key', 'advanced-GCM' ), // Your TextBox Label Name
-		'ag_text_field_api_key',
-		'pluginPage', // Call of settings_fields()
-		'ag_pluginPage_section'
+		__( 'Google API Key', 'advanced-gcm' ), // Your API Key TextBox Label Name
+		'nv_agcm_text_field_api_key',
+		'nv_ag_add_settings_page', // Call of settings_fields()
+		'nv_ag_add_settings_page_section'
 	);
 
 // Add a Security UID field to a Settings page
 	add_settings_field(
 		'ag_uid',
-		__( 'Security UID', 'advanced-GCM' ), // Your TextBox Label Name
-		'ag_text_field_unique_id',
-		'pluginPage', // Call of settings_fields()
-		'ag_pluginPage_section'
+		__( 'Security UID', 'advanced-gcm' ), // Your Security UID TextBox Label Name
+		'nv_agcm_text_field_unique_id',
+		'nv_ag_add_settings_page', // Call of settings_fields()
+		'nv_ag_add_settings_page_section'
 	);
 
-// Add a Default User field to a Settings page
+// Add a Default User Checkbox field to a Settings page
 	add_settings_field(
 		'default_user',
-		__( 'Default Users', 'advanced-GCM' ), // Your Dropdown Box Label Name
-		'ag_text_field_default_users',
-		'pluginPage', // Call of settings_fields()
-		'ag_pluginPage_section'
+		__( 'Default Users', 'advanced-gcm' ), // Your Dropdown Box Label Name
+		'nv_agcm_text_field_default_users',
+		'nv_ag_add_settings_page', // Call of settings_fields()
+		'nv_ag_add_settings_page_section'
 	);
 }
 
-
-function ag_text_field_api_key() {
+/**
+ *  Declare API Key Text Field
+ */
+function nv_agcm_text_field_api_key() {
 
 	$options = get_option( 'ag_settings' );
 	?>
@@ -85,7 +94,10 @@ function ag_text_field_api_key() {
 	<?php
 }
 
-function ag_text_field_unique_id() {
+/**
+ * Declare Unique ID Text Field
+ */
+function nv_agcm_text_field_unique_id() {
 
 $option = get_option('ag_settings');
 
@@ -93,13 +105,14 @@ $option = get_option('ag_settings');
 
         ?>
             <label name='ag_settings[ag_uid]' id='ag_uid'> <?php echo esc_html ($option['ag_uid']); ?></label>
-            <input type='hidden' id="ag_uid" name='ag_settings[ag_uid]' value="<?php echo $option['ag_uid'] ?>" /><br>
+            <input type='hidden' id="ag_uid" name='ag_settings[ag_uid]' value="<?php esc_html_e ($option['ag_uid']); ?>" /><br>
         <?php
     } // if close
 
     else{
 ?>
     <script type="application/javascript">
+
         // will generate random string
          function ag_random_generator() {
               var string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -110,21 +123,25 @@ $option = get_option('ag_settings');
               }
                document.getElementById('ag_uid').value = random_string;
 
-         } // ag_random_generator close
+         } // ag_random_generator() close
 
         </script>
 
         	<input type='text' id="ag_uid" name='ag_settings[ag_uid]' value="<?php echo $option['ag_uid'] ?>" /><br>
-            <span class="description"><?php _e( "Here Unique ID will be generated" ); ?></span> <br><br>
+            <span class="description"><?php esc_html( "Here Unique ID will be generated" ); ?></span> <br><br>
 
             <input type="button" class="button button-primary" value="Generate Key" onclick="ag_random_generator(this)"/>
 
     <?php
     } // else close
 
-} // function close
+}
 
-function ag_text_field_default_users() {
+/**
+ * Declare Default Users Checkbox
+ */
+
+function nv_agcm_text_field_default_users() {
 
 	$result = get_option( 'ag_settings' );
 	$value  = (isset($result['default_user']) && intval($result['default_user']) > 0) ? $result['default_user']:false;
@@ -143,20 +160,23 @@ function ag_text_field_default_users() {
 }
 
 function ag_settings_section_callback() {
-	echo __( '', 'advanced-GCM' ); // Your section description about advanced-gcm
 }
 
+
+/**
+ * Set all the fields to options-general.php page
+ */
 function ag_options_page() {
 
 	?>
 	<form action='options.php' method='post'>
 
-		<h2> <?php esc_html_e( 'Advanced - GCM', 'ag' ); ?></h2>
+		<h2> <?php esc_html_e( 'Advanced - GCM', 'advanced-gcm' ); ?></h2>
 
 		<?php
-		settings_fields( 'pluginPage' );
-		do_settings_sections( 'pluginPage' );
-		submit_button();
+			settings_fields( 'nv_ag_add_settings_page' );
+			do_settings_sections( 'nv_ag_add_settings_page' );
+			submit_button();
 		?>
 	</form>
 	<?php
